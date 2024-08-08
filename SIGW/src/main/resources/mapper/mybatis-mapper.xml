@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmpMapper">
+
+	<insert id="empOneInsert" parameterType="kr.co.ureca.dto.EmpDTO2">
+		insert into emp (empno, ename, job, hiredate, sal, comm, deptno)
+		values (#{empno}, #{ename}, #{job}, curdate(), #{sal}, #{comm}, #{deptno})
+	</insert>
+
+	<select id="allEmpList" parameterType="java.util.List" resultType="kr.co.ureca.dto.EmpDTO2">
+		select empno, ename, job, mgr, hiredate, sal, comm, deptno from emp
+	</select>
+
+</mapper>
