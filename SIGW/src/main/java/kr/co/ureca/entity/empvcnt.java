@@ -23,7 +23,7 @@ public class empvcnt {
     @JoinColumn(name = "empno", nullable = false)
     private employee employee;  // 부서와의 관계 설정
 	
-	@Column(name = "vreamin",nullable= false)
+	@Column(name = "vremain",nullable= false)
 	private int vremain;	
 	
 	@Column(name = "vused",nullable= false)
