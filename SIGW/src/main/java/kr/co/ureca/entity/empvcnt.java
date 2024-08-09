@@ -17,14 +17,14 @@ import jakarta.persistence.*;
 public class empvcnt {
 	
 	@Id
-	private int vtype; 
+	private VacationType vtype; 
 	
 	@ManyToOne
     @JoinColumn(name = "empno", nullable = false)
     private employee employee;  // 부서와의 관계 설정
 	
 	@Column(name = "vremain",nullable= false)
-	private VacationType vremain;	
+	private int vremain;	
 	
 	@Column(name = "vused",nullable= false)
 	private int vused;	
