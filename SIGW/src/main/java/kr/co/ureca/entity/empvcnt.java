@@ -24,7 +24,7 @@ public class empvcnt {
     private employee employee;  // 부서와의 관계 설정
 	
 	@Column(name = "vremain",nullable= false)
-	private int vremain;	
+	private VacationType vremain;	
 	
 	@Column(name = "vused",nullable= false)
 	private int vused;	
