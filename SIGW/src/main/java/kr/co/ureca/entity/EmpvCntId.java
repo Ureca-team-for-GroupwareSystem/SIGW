@@ -1,9 +1,12 @@
 package kr.co.ureca.entity;
 
 import jakarta.persistence.Embeddable;
+import lombok.Getter;
+
 import java.io.Serializable;
 
 @Embeddable
+@Getter
 public class EmpvCntId implements Serializable {
 
     private static final long serialVersionUID = 1L;
