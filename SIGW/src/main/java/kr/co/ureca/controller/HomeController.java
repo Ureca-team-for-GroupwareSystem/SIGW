@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpSession;
 import kr.co.ureca.entity.employee;
 import kr.co.ureca.entity.empvcnt;
 import kr.co.ureca.service.HomeService;
@@ -26,15 +27,20 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("/{empno}")
-	public String getEmployeeInfo(@PathVariable int empno, Model model) {
+	@GetMapping("/{pathEmpno}") // 로그인 기능 구현시 수정될 part 1
+	public String getEmployeeInfo(HttpSession session, @PathVariable int pathEmpno, Model model) {
+		session.setAttribute("empno", pathEmpno); // 로그인 기능 구현시 수정될 part 2
+		int empno = (int) session.getAttribute("empno");
+		
 		Optional<employee> employee = homeService.getEmployeeById(empno);
 		List<empvcnt> vacations = homeService.getEmpVCntsByEmpno(empno);
+		
 		if(employee.isPresent()) {
 			model.addAttribute("employee", employee.get());
 			model.addAttribute("vacations", vacations);
 		} else {
 			return "home";
+//			return "login"; // 페이지 구현 필요 (로그인 페이지)
 		}
 		return "home"; 
 	}

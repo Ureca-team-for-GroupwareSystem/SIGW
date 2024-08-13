@@ -6,11 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TestController {
 	
-	@GetMapping("/vacation/apply")
-	public String vacationApply() {
-		return "vacation_apply"; 
-	}
-	
 	@GetMapping("/vacation/myapply")
 	public String vacationMyApply() {
 		return "vacation_myapply"; 

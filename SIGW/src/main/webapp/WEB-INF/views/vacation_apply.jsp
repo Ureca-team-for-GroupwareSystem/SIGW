@@ -28,7 +28,8 @@
 	<%@ include file="./horimenu.jsp" %>
 	
 	<div class="container mt-5">
-        <h2>휴가 신청</h2>
+        <h2> 사원번호 ${empno}번님의 휴가 신청</h2>
+        
 		<form action="/submitVacationApply" method="post" onsubmit="return validateForm();">
 		  <!-- 휴가 종류 선택 -->
             <div class="form-group">
