@@ -7,7 +7,7 @@
 	  <!-- Links -->
 	  <ul class="navbar-nav">
 	    <li class="nav-item">
-	      <a class="nav-link" href="http://localhost:8080/ureca/home/${employee.empno}">메인화면</a>
+	      <a class="nav-link" href="http://localhost:8080/ureca/home/${empno}">메인화면</a>
 	    </li>
 	
 	    <!-- Dropdown -->

@@ -36,6 +36,7 @@ public class HomeController {
 		List<empvcnt> vacations = homeService.getEmpVCntsByEmpno(empno);
 		
 		if(employee.isPresent()) {
+			model.addAttribute("empno", empno);
 			model.addAttribute("employee", employee.get());
 			model.addAttribute("vacations", vacations);
 		} else {
