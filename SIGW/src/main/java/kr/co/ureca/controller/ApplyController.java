@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import jakarta.servlet.http.HttpSession;
-import kr.co.ureca.entity.employee;
+import kr.co.ureca.entity.Employee;
 import kr.co.ureca.service.ApplyService;
 
 @Controller
@@ -22,7 +22,7 @@ public class ApplyController {
 		int empno = (int) session.getAttribute("empno");
 		model.addAttribute("empno", empno);
 		
-		List<employee> employee= applyService.getAllEmployees();
+		List<Employee> employee= applyService.getAllEmployees();
 		model.addAttribute("employee", employee);
 		
 		return "vacation_apply";

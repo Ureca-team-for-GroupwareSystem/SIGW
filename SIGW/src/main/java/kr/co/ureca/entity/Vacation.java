@@ -15,7 +15,7 @@ import jakarta.persistence.*;
 @Getter
 @Setter
 @ToString
-public class vacation {
+public class Vacation {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class vacation {
 	
 	@ManyToOne
     @JoinColumn(name = "vemp", nullable = false)
-    private employee employee;  // 부서와의 관계 설정
+    private Employee employee;  // 부서와의 관계 설정
 	
 	@Column(name = "vtype",nullable= false)
 	private VacationType vtype;

@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.ureca.entity.employee;
-import kr.co.ureca.entity.empvcnt;
+import kr.co.ureca.entity.Employee;
+import kr.co.ureca.entity.Empvcnt;
 import kr.co.ureca.repository.EmployeeRepository;
 import kr.co.ureca.repository.EmpvCntRepository;
 
@@ -21,14 +21,14 @@ public class HomeServiceImpl implements HomeService {
 	EmpvCntRepository empvCntRepository;
 
 	@Override
-	public Optional<employee> getEmployeeById(int empno) {
-		Optional<employee> emp = employeeRepository.findById(empno);
+	public Optional<Employee> getEmployeeById(int empno) {
+		Optional<Employee> emp = employeeRepository.findById(empno);
 		return emp;
 	}
 
 	@Override
-	public List<empvcnt> getEmpVCntsByEmpno(int empno) {
-		List<empvcnt> empvcntList = empvCntRepository.findByEmployeeEmpno(empno);
+	public List<Empvcnt> getEmpVCntsByEmpno(int empno) {
+		List<Empvcnt> empvcntList = empvCntRepository.findByEmployeeEmpno(empno);
 		return empvcntList;
 	}
 

@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import kr.co.ureca.entity.EmpvCntId;
-import kr.co.ureca.entity.empvcnt;
+import kr.co.ureca.entity.Empvcnt;
 
 @Repository
-public interface EmpvCntRepository extends JpaRepository<empvcnt, EmpvCntId>{
+public interface EmpvCntRepository extends JpaRepository<Empvcnt, EmpvCntId>{
 
 	
-	List<empvcnt> findByEmployeeEmpno(int empno);
+	List<Empvcnt> findByEmployeeEmpno(int empno);
 }

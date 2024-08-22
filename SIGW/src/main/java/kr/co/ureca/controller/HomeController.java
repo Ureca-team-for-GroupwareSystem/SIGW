@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpSession;
-import kr.co.ureca.entity.employee;
-import kr.co.ureca.entity.empvcnt;
+import kr.co.ureca.entity.Employee;
+import kr.co.ureca.entity.Empvcnt;
 import kr.co.ureca.service.HomeService;
 
 @Controller
@@ -32,8 +32,8 @@ public class HomeController {
 		session.setAttribute("empno", pathEmpno); // 로그인 기능 구현시 수정될 part 2
 		int empno = (int) session.getAttribute("empno");
 		
-		Optional<employee> employee = homeService.getEmployeeById(empno);
-		List<empvcnt> vacations = homeService.getEmpVCntsByEmpno(empno);
+		Optional<Employee> employee = homeService.getEmployeeById(empno);
+		List<Empvcnt> vacations = homeService.getEmpVCntsByEmpno(empno);
 		
 		if(employee.isPresent()) {
 			model.addAttribute("empno", empno);

@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class empvcnt {
+public class Empvcnt {
 
     @EmbeddedId
     private EmpvCntId id;
@@ -18,7 +18,7 @@ public class empvcnt {
     @MapsId("empno")
     @ManyToOne
     @JoinColumn(name = "empno", nullable = false)
-    private employee employee; // 부서와의 관계 설정
+    private Employee employee; // 부서와의 관계 설정
 
     @Column(name = "vremain", nullable = false)
     private int vremain;

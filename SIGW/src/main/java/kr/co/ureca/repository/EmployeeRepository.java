@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import kr.co.ureca.entity.employee;
+import kr.co.ureca.entity.Employee;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<employee, Integer>{
-	List<employee> findAllByOrderByDeptno_DeptnoAscPositionAsc();
+public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
+	List<Employee> findAllByOrderByDeptno_DeptnoAscPositionAsc();
 }

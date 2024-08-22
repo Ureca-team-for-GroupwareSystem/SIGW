@@ -15,12 +15,12 @@ import jakarta.persistence.*;
 @Getter
 @Setter
 @ToString
-public class department {
+public class Department {
 	
 	@Id
 	private int deptno; 
 	
 	// 직원들과의 관계 설정
     @OneToMany(mappedBy = "deptno", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<employee> employees;
+    private List<Employee> employees;
 }

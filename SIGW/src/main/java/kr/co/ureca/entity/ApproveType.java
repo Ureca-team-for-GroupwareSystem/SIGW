@@ -1,6 +1,6 @@
 package kr.co.ureca.entity;
 
-public enum approveType {
+public enum ApproveType {
 	DEFAULT,  //기본
 	NOTYET,   //내 차례 아님 
 	MYTURN,  // 내 차례임 
