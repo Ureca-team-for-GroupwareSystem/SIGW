@@ -4,21 +4,13 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.ureca.entity.Employee;
-import kr.co.ureca.entity.EmpvCntId;
-import kr.co.ureca.entity.Empvcnt;
-import kr.co.ureca.entity.Vacation;
-import kr.co.ureca.entity.VacationState;
-import kr.co.ureca.entity.VacationType;
-import kr.co.ureca.repository.EmployeeRepository;
-import kr.co.ureca.repository.EmpvCntRepository;
-import kr.co.ureca.repository.VacationRepository;
+import kr.co.ureca.entity.*;
+import kr.co.ureca.repository.*;
 
 @Service
 public class ApplyServiceImpl implements ApplyService {
@@ -31,6 +23,9 @@ public class ApplyServiceImpl implements ApplyService {
 	
 	@Autowired
 	VacationRepository vacationRepository;
+	
+	@Autowired
+	ApproverRepository approverRepository;
 
 	@Override
 	public List<Employee> getAllEmployees() {
@@ -74,11 +69,10 @@ public class ApplyServiceImpl implements ApplyService {
         	vacationApply.setVend(Date.valueOf(endDate));
         	vacationApply.setVstate(VacationState.PENDING);
         	
-        	vacationRepository.save(vacationApply);
+        	Vacation vacation = vacationRepository.save(vacationApply);
         	
         	// 결재선 계산 (사원 번호 받아서 int값으로 찾아내서 approver 데이터베이스에 저장)
-        	handleApproverProcessing(vacationApply, employee, approvers);
-        	
+        	handleApproverProcessing(vacation, approvers);
         	return true;
         } else if (empvcnt.getVremain() > daysBetween) { // 휴가 종류가 연차 월차면 날짜 비교 처리
         	// 가능하면 휴가 데이터베이스에 값 저장
@@ -89,18 +83,74 @@ public class ApplyServiceImpl implements ApplyService {
         	vacationApply.setVend(Date.valueOf(endDate));
         	vacationApply.setVstate(VacationState.PENDING);
         	
-        	vacationRepository.save(vacationApply);
+        	Vacation vacation = vacationRepository.save(vacationApply);
 			
         	// 결재선 계산 (사원 번호 받아서 int값으로 찾아내서 approver 데이터베이스에 저장)
-        	handleApproverProcessing(vacationApply, employee, approvers);
+        	handleApproverProcessing(vacation, approvers);
         	return true;
         }
         return false;
 	}
 
-	private void handleApproverProcessing(Vacation vacationApply, Employee employee, String[] approvers) {
-		
-		
+	private void handleApproverProcessing(Vacation vacation, String[] approvers) {
+		// 결재자 목록을 저장할 리스트 생성
+	    List<Approver> approverList = new ArrayList<>();
+
+	    // 주어진 approvers 배열에 있는 사원 ID를 통해 Employee 객체를 조회하고 리스트에 추가
+	    for (String approverIdStr : approvers) {
+	        int approverId = Integer.parseInt(approverIdStr);
+	        Employee approverEmployee = employeeRepository.findById(approverId).get();
+
+	        // Approver 객체 생성 및 리스트에 추가
+	        Approver approver = new Approver();
+	        approver.setVid(vacation);
+	        approver.setEmployee(approverEmployee);
+	        approverList.add(approver);
+	    }
+	    
+	    // Approver 리스트를 부서 번호 및 직급 순서로 정렬
+	    approverList.sort((a1, a2) -> {
+	        int deptComparison = Integer.compare(
+	            a1.getEmployee().getDeptno().getDeptno(), 
+	            a2.getEmployee().getDeptno().getDeptno()
+	        );
+	        if (deptComparison != 0) {
+	            return deptComparison;
+	        } else {
+	            return Integer.compare(a1.getEmployee().getPosition(), a2.getEmployee().getPosition());
+	        }
+	    });
+	    
+	    // 정렬된 순서대로 acnt 설정 및 astate 설정
+	    int acnt = 0;
+	    for (Approver approver : approverList) {
+	        approver.setAcnt(acnt);
+	        if (acnt == approverList.size()-1) {
+	            approver.setAstate(ApproveType.MYTURN);
+	        } else {
+	            approver.setAstate(ApproveType.NOTYET);
+	        }
+	        acnt++;
+	    }
+	    
+	 // Approver 리스트를 데이터베이스에 한 번에 저장
+	    approverRepository.saveAll(approverList);
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
