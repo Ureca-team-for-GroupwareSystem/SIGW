@@ -42,4 +42,13 @@ public class EmpvCntId implements Serializable {
         result = 31 * result + empno;
         return result;
     }
+    
+    @Override
+    public String toString() {
+        return "EmpvCntId{" +
+                "vtype=" + vtype +
+                ", empno=" + empno +
+                '}';
+    }
+    
 }

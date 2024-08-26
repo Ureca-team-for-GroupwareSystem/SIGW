@@ -1,6 +1,7 @@
 package kr.co.ureca.entity;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.sql.Date;
 import java.util.List;
@@ -42,6 +43,14 @@ public class Vacation {
 	
 	@OneToMany(mappedBy = "vid", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Approver> approvers;
+	
+	@PrePersist
+    public void prePersist() {
+        // 현재 날짜를 vdate에 설정
+        if (vdate == null) {
+            vdate = Date.valueOf(LocalDate.now());
+        }
+    }
 	
 }
 

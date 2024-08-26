@@ -11,23 +11,30 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-       function validateForm() {
-           var startDate = document.getElementById('startDate').value;
-           var endDate = document.getElementById('endDate').value;
-
-           if (new Date(startDate) > new Date(endDate)) {
-               alert('휴가 종료일은 시작일보다 커야 합니다.');
-               return false; // 폼 제출을 막음
-           }
-           return true; // 폼 제출 허용
-       }
-   </script>
-   <style>
-   /* 테이블 셀 안의 체크박스를 중앙에 정렬하는 스타일 */
-   .table td {
-       vertical-align: middle; /* 수직 중앙 정렬 */
-       text-align: center;     /* 수평 중앙 정렬 */
-   }
+	function validateForm() {
+	    var startDate = document.getElementById('startDate').value;
+	    var endDate = document.getElementById('endDate').value;
+	
+	    if (new Date(startDate) > new Date(endDate)) {
+	        alert('휴가 종료일은 시작일보다 커야 합니다.');
+	        return false; // 폼 제출을 막음
+	    }
+	    return true; // 폼 제출 허용
+	}
+     
+	window.onload = function() {
+		var errorMessage = "${errorMessage}";
+		if (errorMessage) {
+		    alert(errorMessage); // 에러 메시지가 있을 경우 경고창 표시
+		}
+	}
+ </script>
+ <style>
+ /* 테이블 셀 안의 체크박스를 중앙에 정렬하는 스타일 */
+ .table td {
+     vertical-align: middle; /* 수직 중앙 정렬 */
+     text-align: center;     /* 수평 중앙 정렬 */
+ }
 </style>
 </head>
 <body>
@@ -37,16 +44,16 @@
 	<div class="container mt-5">
         <h2> 사원번호 ${empno}번님의 휴가 신청</h2>
         
-		<form action="/submitVacationApply" method="post" onsubmit="return validateForm();">
+		<form action="http://localhost:8080/ureca/submitVacationApply" method="post" onsubmit="return validateForm();">
 		  <!-- 휴가 종류 선택 -->
             <div class="form-group">
                 <label for="vtype">휴가 종류</label>
                 <select class="form-control" id="vtype" name="vtype" required>
                     <option value="">선택하세요</option>
-                    <option value="annual">연차 휴가</option>
-                    <option value="monthly">월차 휴가</option>
-                    <option value="sick">병가</option>
-                    <option value="event">경조사</option>
+                    <option value="ANNUAL">연차 휴가</option>
+                    <option value="MONTHLY">월차 휴가</option>
+                    <option value="SICK">병가</option>
+                    <option value="PERSONAL">경조사</option>
                 </select>
             </div>
             
