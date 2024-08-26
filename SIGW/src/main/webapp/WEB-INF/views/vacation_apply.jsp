@@ -14,9 +14,21 @@
 	function validateForm() {
 	    var startDate = document.getElementById('startDate').value;
 	    var endDate = document.getElementById('endDate').value;
-	
+	    var vtype = document.getElementById('vtype').value;
+	    var approvers = document.querySelectorAll('input[name="approvers"]:checked');
+
+	    if (vtype === "") {
+	        alert('휴가 종류를 선택해 주세요.');
+	        return false; // 폼 제출을 막음
+	    }
+
 	    if (new Date(startDate) > new Date(endDate)) {
 	        alert('휴가 종료일은 시작일보다 커야 합니다.');
+	        return false; // 폼 제출을 막음
+	    }
+
+	    if (approvers.length === 0) {
+	        alert('적어도 한 명 이상의 결재선을 선택해 주세요.');
 	        return false; // 폼 제출을 막음
 	    }
 	    return true; // 폼 제출 허용
