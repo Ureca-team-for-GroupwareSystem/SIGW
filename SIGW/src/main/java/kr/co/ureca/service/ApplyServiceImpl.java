@@ -103,7 +103,7 @@ public class ApplyServiceImpl implements ApplyService {
 
 	        // Approver 객체 생성 및 리스트에 추가
 	        Approver approver = new Approver();
-	        approver.setVid(vacation);
+	        approver.setVacation(vacation);
 	        approver.setEmployee(approverEmployee);
 	        approverList.add(approver);
 	    }

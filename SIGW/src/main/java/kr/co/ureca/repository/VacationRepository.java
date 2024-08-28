@@ -11,4 +11,6 @@ import kr.co.ureca.entity.Vacation;
 @Repository
 public interface VacationRepository extends JpaRepository<Vacation, Integer>{
 	List<Vacation> findByEmployee(Employee employee);
+	
+	List<Vacation> findByVidIn(List<Integer> vidList);
 }

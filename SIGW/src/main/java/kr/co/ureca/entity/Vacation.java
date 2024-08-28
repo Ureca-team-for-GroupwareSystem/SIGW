@@ -41,7 +41,7 @@ public class Vacation {
 	@Column(name = "vstate",nullable= false)
 	private VacationState vstate;
 	
-	@OneToMany(mappedBy = "vid", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Approver> approvers;
 	
 	@PrePersist

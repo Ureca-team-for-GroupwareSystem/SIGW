@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import jakarta.servlet.http.HttpSession;
 import kr.co.ureca.entity.Employee;
 import kr.co.ureca.entity.Vacation;
+import kr.co.ureca.service.ApproverService;
 import kr.co.ureca.service.EmployeeService;
 import kr.co.ureca.service.VacationService;
 
@@ -21,6 +22,9 @@ public class TestController {
 
     @Autowired
     private EmployeeService employeeService;
+    
+    @Autowired
+    private ApproverService approverService;
 
     @GetMapping("/vacation/myapply")
     public String vacationMyApply(HttpSession session, Model model) {
@@ -44,8 +48,29 @@ public class TestController {
         model.addAttribute("vacationList", vacationList);
         return "vacation_myapply"; 
     }
+
+    
     @GetMapping("/vacation/approval")
-    public String vacationApproval() {
-        return "vacation_approval"; 
+    public String vacationApproval(HttpSession session, Model model) {
+        Integer empno = (Integer) session.getAttribute("empno");
+
+        if (empno == null) {
+            return "redirect:/login";
+        }
+
+        Employee approver = employeeService.findById(empno);
+        if (approver == null) {
+            return "error";
+        }
+
+        // Approver가 결제할 수 있는 모든 휴가 신청 목록을 가져옴
+        List<Vacation> vacations = approverService.getVacationsByEmployee(approver);
+        System.out.println("This is Test Code : " + vacations.get(0).getVdate());
+        System.out.println("This is Test Code : " + vacations.get(0).getVstart());
+        System.out.println("This is Test Code : " + vacations.get(0).getVend());
+        System.out.println("This is Test Code : " + vacations.get(0).getVid());
+        model.addAttribute("vacationlist", vacations);
+
+        return "vacation_approval";
     }
 }
