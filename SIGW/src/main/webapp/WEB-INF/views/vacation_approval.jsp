@@ -23,33 +23,58 @@
              
             </c:when>
             <c:otherwise>
-                <ul class="list-group list-group-flush">
-                    <c:forEach var="eachvacation" items="${vacationlist}">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div class="d-flex" style="width: 15%;">
-                                <span class="mr-5">${eachvacation.vid}</span>
-                                <span>${eachvacation.employee.empname}</span>
-                            </div>
-                            <div class="d-flex flex-column" style="width: 20%;">
-                                <span>${eachvacation.vtype}</span>
-                            </div>
-                            <div class="d-flex flex-column" style="width: 25%;">
-                                <span>${eachvacation.vstart} ~ ${eachvacation.vend}</span>
-                            </div>
-                            <div class="d-flex" style="width: 20%; justify-content: flex-end; gap: 5px;">
-   								<form action="/ureca/vacation/approve" method="post" class="d-inline">
-                                    <input type="hidden" name="requestId" value="${eachvacation.vid}">
-                                    <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">승인</button>
-                                </form>
-                                <form action="/ureca/vacation/reject" method="post" class="d-inline">
-                                    <input type="hidden" name="requestId" value="${eachvacation.vid}">
-                                    <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">거절</button>
-                                </form>
-							</div>
+				 <ul class="list-group list-group-flush">
+				  <!-- 헤더 추가 -->
+					    <li class="list-group-item d-flex justify-content-between align-items-center font-weight-bold">
+					        <div class="d-flex" style="width: 10%;">
+					            <span>휴가번호</span>
+					        </div>
+					        <div class="d-flex" style="width: 20%;">
+					            <span>사원명</span>
+					        </div>
+					        <div class="d-flex" style="width: 20%;">
+					            <span>휴가종류</span>
+					        </div>
+					        <div class="d-flex" style="width: 25%;">
+					            <span>휴가기간</span>
+					        </div>
+					        <div class="d-flex" style="width: 25%; justify-content: flex-end;">
+					            <span></span>
+					        </div>
+					    </li>
+				 
+				    <c:forEach var="eachvacation" items="${vacationlist}">
+				        <li class="list-group-item d-flex justify-content-between align-items-center">
+				            <!-- vid와 empname을 분리하여 각각의 div에 배치 -->
+				            <div class="d-flex" style="width: 10%;">
+				                <span>${eachvacation.vid}</span>
+				            </div>
+				            <div class="d-flex" style="width: 20%;">
+				                <span>${eachvacation.employee.empname}</span>
+				            </div>
+				            <!-- vtype -->
+				            <div class="d-flex" style="width: 20%;">
+				                <span>${eachvacation.vtype}</span>
+				            </div>
+				            <!-- vstart와 vend -->
+				            <div class="d-flex" style="width: 25%;">
+				                <span>${eachvacation.vstart} ~ ${eachvacation.vend}</span>
+				            </div>
+				            <!-- 버튼들 -->
+				            <div class="d-flex" style="width: 25%; justify-content: flex-end; gap: 5px;">
+				                <form action="/ureca/vacation/approve" method="post" class="d-inline">
+				                    <input type="hidden" name="requestId" value="${eachvacation.vid}">
+				                    <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">승인</button>
+				                </form>
+				                <form action="/ureca/vacation/reject" method="post" class="d-inline">
+				                    <input type="hidden" name="requestId" value="${eachvacation.vid}">
+				                    <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">거절</button>
+				                </form>
+				            </div>
+				        </li>
+				    </c:forEach>
+				</ul>
 
-                        </li>
-                    </c:forEach>
-                </ul>
             </c:otherwise>
         </c:choose>
 	</div>
