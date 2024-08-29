@@ -56,21 +56,14 @@ public class ApplyController {
         // 확인 로그 END
 		
         int empno = (int) session.getAttribute("empno");
-        // 서비스에 파라미터 전달
         boolean isSuccess = applyService.applyVacation(empno, vtype, startDate, endDate, approvers);
         
         if(!isSuccess) {
             // 실패 시 에러 메시지 리다이렉션에 전달
         	redirectAttributes.addFlashAttribute("errorMessage", "잔여 휴가일이 부족합니다.");
-        	 
         	System.out.println("===== ApplyController submitVacationApply() END =====");
             return "redirect:/vacation/apply"; // 실패 시, GET 요청으로 리다이렉트하여 폼을 다시 로드
         }
-		
-//		  해당 부분 myapply 구현 필요
-//        List<Vacation> vacation= applyService.getMyVacation();
-//        redirectAttributes.addFlashAttribute("vacation", vacation);
-		
 		System.out.println("===== ApplyController submitVacationApply() END =====");
 		return "redirect:/vacation/myapply";
 	}
