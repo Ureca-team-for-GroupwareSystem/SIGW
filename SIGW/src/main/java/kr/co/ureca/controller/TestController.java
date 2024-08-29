@@ -65,10 +65,10 @@ public class TestController {
 
         // Approver가 결제할 수 있는 모든 휴가 신청 목록을 가져옴
         List<Vacation> vacations = approverService.getVacationsByEmployee(approver);
-        System.out.println("This is Test Code : " + vacations.get(0).getVdate());
-        System.out.println("This is Test Code : " + vacations.get(0).getVstart());
-        System.out.println("This is Test Code : " + vacations.get(0).getVend());
-        System.out.println("This is Test Code : " + vacations.get(0).getVid());
+//        System.out.println("This is Test Code : " + vacations.get(0).getVdate());
+//        System.out.println("This is Test Code : " + vacations.get(0).getVstart());
+//        System.out.println("This is Test Code : " + vacations.get(0).getVend());
+//        System.out.println("This is Test Code : " + vacations.get(0).getVid());
         model.addAttribute("vacationlist", vacations);
 
         return "vacation_approval";

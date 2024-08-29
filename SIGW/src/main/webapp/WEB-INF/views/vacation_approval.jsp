@@ -37,15 +37,16 @@
                                 <span>${eachvacation.vstart} ~ ${eachvacation.vend}</span>
                             </div>
                             <div class="d-flex" style="width: 20%; justify-content: flex-end; gap: 5px;">
-                                <form action="/vacation/approve" method="post" class="d-inline">
-                                    <input type="hidden" name="requestId" value="${each-vacation.vid}">
+   								<form action="/ureca/vacation/approve" method="post" class="d-inline">
+                                    <input type="hidden" name="requestId" value="${eachvacation.vid}">
                                     <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">승인</button>
                                 </form>
-                                <form action="/vacation/reject" method="post" class="d-inline">
-                                    <input type="hidden" name="requestId" value="${each-vacation.vid}">
+                                <form action="/ureca/vacation/reject" method="post" class="d-inline">
+                                    <input type="hidden" name="requestId" value="${eachvacation.vid}">
                                     <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">거절</button>
                                 </form>
-                            </div>
+							</div>
+
                         </li>
                     </c:forEach>
                 </ul>
@@ -54,6 +55,6 @@
 	</div>
 	
 	<%@ include file="./footer.jsp" %>
-	
+		
 </body>
 </html>

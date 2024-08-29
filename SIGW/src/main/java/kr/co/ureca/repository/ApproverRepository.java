@@ -21,4 +21,6 @@ public interface ApproverRepository extends JpaRepository<Approver, Integer>{
 	    
 
 	List<Approver> findByEmployeeEmpnoAndAstate(int empno, ApproveType astate);
+	
+	List<Approver> findByVacation(Vacation vacation);
 }
